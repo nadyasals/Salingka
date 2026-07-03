@@ -8,7 +8,7 @@ function GuideCard({ item, index }) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold: 0.15 }
+      { threshold: 0.12 }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -18,20 +18,21 @@ function GuideCard({ item, index }) {
     <div
       ref={ref}
       style={{
-        padding: "1.75rem",
+        padding: "clamp(1.2rem, 3vw, 1.75rem)",
         borderRadius: "14px",
         border: "1px solid rgba(90,176,138,0.12)",
         background: "rgba(26,51,40,0.5)",
         backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(24px)",
-        transition: `opacity 0.6s ease ${index * 0.08}s, transform 0.6s ease ${index * 0.08}s`,
+        transition: `opacity 0.6s ease ${index * 0.07}s, transform 0.6s ease ${index * 0.07}s`,
       }}
     >
-      <div style={{ fontSize: "2rem", marginBottom: "1rem" }}>{item.icon}</div>
+      <div role="img" aria-label={item.title} style={{ fontSize: "2rem", marginBottom: "1rem" }}>{item.icon}</div>
       <h3 style={{
         fontFamily: "var(--font-display)",
-        fontSize: "1rem",
+        fontSize: "clamp(0.9rem, 2vw, 1rem)",
         fontWeight: 700,
         color: "var(--cream)",
         marginBottom: "0.5rem",
@@ -40,7 +41,7 @@ function GuideCard({ item, index }) {
         {item.title}
       </h3>
       <p style={{
-        fontSize: "0.83rem",
+        fontSize: "clamp(0.78rem, 1.8vw, 0.83rem)",
         color: "var(--mist)",
         lineHeight: 1.65,
         fontWeight: 300,
@@ -54,13 +55,13 @@ function GuideCard({ item, index }) {
 export default function Guidelines() {
   return (
     <section id="panduan" style={{
-      padding: "6rem 2rem",
+      padding: "clamp(3.5rem, 8vw, 6rem) clamp(1rem, 4vw, 2rem)",
       background: "var(--moss)",
       borderTop: "1px solid rgba(90,176,138,0.08)",
     }}>
       <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
         {/* Header */}
-        <div style={{ marginBottom: "3.5rem", maxWidth: "600px" }}>
+        <div style={{ marginBottom: "clamp(2.5rem, 6vw, 3.5rem)", maxWidth: "600px" }}>
           <p style={{
             fontFamily: "var(--font-mono)",
             fontSize: "0.7rem",
@@ -73,7 +74,7 @@ export default function Guidelines() {
           </p>
           <h2 style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
+            fontSize: "clamp(1.6rem, 4vw, 2.8rem)",
             fontWeight: 700,
             color: "var(--white)",
             lineHeight: 1.15,
@@ -83,7 +84,7 @@ export default function Guidelines() {
             <em style={{ color: "var(--leaf)", fontStyle: "italic" }}>bukan soal foto yang indah</em>
           </h2>
           <p style={{
-            fontSize: "0.9rem",
+            fontSize: "clamp(0.85rem, 2vw, 0.9rem)",
             color: "var(--mist)",
             lineHeight: 1.7,
             fontWeight: 300,
@@ -92,11 +93,11 @@ export default function Guidelines() {
           </p>
         </div>
 
-        {/* Grid */}
+        {/* Grid — 1 col mobile, 2 col tablet, 3 col desktop */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-          gap: "14px",
+          gridTemplateColumns: "repeat(auto-fill, minmax(min(260px, 100%), 1fr))",
+          gap: "clamp(10px, 2vw, 14px)",
         }}>
           {guidelines.map((item, i) => (
             <GuideCard key={i} item={item} index={i} />

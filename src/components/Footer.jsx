@@ -1,35 +1,33 @@
 export default function Footer() {
   return (
     <footer style={{
-      padding: "4rem 2rem 2.5rem",
+      padding: "clamp(2.5rem, 6vw, 4rem) clamp(1rem, 4vw, 2rem) clamp(1.5rem, 4vw, 2.5rem)",
       background: "var(--forest)",
       borderTop: "1px solid rgba(90,176,138,0.1)",
     }}>
       <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
         {/* Top row */}
         <div style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          flexWrap: "wrap",
-          gap: "2rem",
-          marginBottom: "3rem",
-          paddingBottom: "3rem",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
+          gap: "clamp(1.5rem, 4vw, 2.5rem)",
+          marginBottom: "clamp(2rem, 5vw, 3rem)",
+          paddingBottom: "clamp(2rem, 5vw, 3rem)",
           borderBottom: "1px solid rgba(90,176,138,0.1)",
         }}>
           {/* Brand */}
-          <div style={{ maxWidth: "320px" }}>
+          <div>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "1rem" }}>
-              <span style={{ fontSize: "24px" }}>🌿</span>
+              <span style={{ fontSize: "24px" }} aria-hidden="true">🌿</span>
               <span style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "1.3rem",
                 fontWeight: 700,
                 color: "var(--leaf)",
-              }}>Rimba Trail</span>
+              }}>Salingka</span>
             </div>
             <p style={{
-              fontSize: "0.83rem",
+              fontSize: "clamp(0.78rem, 1.8vw, 0.83rem)",
               color: "var(--mist)",
               lineHeight: 1.7,
               fontWeight: 300,
@@ -64,7 +62,7 @@ export default function Footer() {
                   <span style={{
                     width: "6px", height: "6px", borderRadius: "50%",
                     background: s.color, flexShrink: 0,
-                  }} />
+                  }} aria-hidden="true" />
                   <span style={{ fontFamily: "var(--font-mono)", color: s.color, fontSize: "0.7rem" }}>{s.code}</span>
                   <span style={{ color: "var(--mist)" }}>{s.label}</span>
                 </div>
@@ -73,7 +71,7 @@ export default function Footer() {
           </div>
 
           {/* Nav links */}
-          <div>
+          <nav aria-label="Footer navigation">
             <p style={{
               fontFamily: "var(--font-mono)",
               fontSize: "0.65rem",
@@ -86,12 +84,12 @@ export default function Footer() {
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               {[
-                { label: "Tentang Rimba Trail", href: "#tentang" },
+                { label: "Tentang Salingka", href: "#tentang" },
                 { label: "Destinasi Ekowisata", href: "#destinasi" },
                 { label: "Panduan Wisatawan", href: "#panduan" },
               ].map(l => (
                 <a key={l.label} href={l.href} style={{
-                  fontSize: "0.83rem",
+                  fontSize: "clamp(0.78rem, 1.8vw, 0.83rem)",
                   color: "var(--mist)",
                   transition: "color 0.2s",
                 }}
@@ -102,7 +100,7 @@ export default function Footer() {
                 </a>
               ))}
             </div>
-          </div>
+          </nav>
         </div>
 
         {/* Bottom row */}
@@ -111,17 +109,17 @@ export default function Footer() {
           justifyContent: "space-between",
           alignItems: "center",
           flexWrap: "wrap",
-          gap: "1rem",
+          gap: "0.75rem",
         }}>
           <p style={{
-            fontSize: "0.75rem",
+            fontSize: "clamp(0.65rem, 1.5vw, 0.75rem)",
             color: "rgba(168,201,184,0.4)",
             fontFamily: "var(--font-mono)",
           }}>
-            © 2026 Rimba Trail · SDGs Creative Web Competition · BytesFest 2026
+            © 2026 Salingka · SDGs Creative Web Competition · BytesFest 2026
           </p>
           <p style={{
-            fontSize: "0.75rem",
+            fontSize: "clamp(0.65rem, 1.5vw, 0.75rem)",
             color: "rgba(168,201,184,0.4)",
             fontFamily: "var(--font-mono)",
           }}>
