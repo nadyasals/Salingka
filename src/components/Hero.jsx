@@ -1,164 +1,181 @@
 import { useEffect, useRef } from "react";
+import { gsap, ScrollTrigger, EASE } from "../hooks/useScrollReveal";
 
 export default function Hero() {
-  const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const ctaRef = useRef(null);
+  const sectionRef = useRef(null);
+  const bgRef = useRef(null);
+  const contentRef = useRef(null);
 
   useEffect(() => {
-    const els = [titleRef.current, subtitleRef.current, ctaRef.current];
-    els.forEach((el, i) => {
-      if (!el) return;
-      el.style.opacity = "0";
-      el.style.transform = "translateY(32px)";
-      setTimeout(() => {
-        el.style.transition = "opacity 0.9s ease, transform 0.9s ease";
-        el.style.opacity = "1";
-        el.style.transform = "translateY(0)";
-      }, 300 + i * 200);
-    });
+    const ctx = gsap.context(() => {
+      const content = contentRef.current;
+      // Semua elemen yang perlu animasi masuk ditandai data-animate
+      // Urutan DOM = urutan animasi, jadi tidak perlu atur index manual
+      const items = gsap.utils.toArray(content.querySelectorAll("[data-animate]"));
+
+      // Set kondisi awal SEKALI di sini — bukan lewat inline style
+      // supaya tidak ada flash konten sebelum JS jalan
+      gsap.set(items, { opacity: 0, y: 24 });
+
+      // --- Timeline tunggal untuk load-in, tidak ada timeline lain yang tabrakan ---
+      gsap.timeline({ defaults: { ease: EASE } })
+        .to(items, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.09, // jarak antar elemen dipangkas, biar tidak berasa lama
+        });
+
+      // --- Parallax background, terpisah dari load-in timeline ---
+      // scrub murni mengikuti posisi scroll, tidak ada delay/duration
+      gsap.to(bgRef.current, {
+        yPercent: 18,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      // --- Fade saat scroll keluar hero ---
+      // Range digeser lebih jauh (40%–100%) supaya tidak overlap
+      // dengan animasi load-in yang baru selesai di awal
+      gsap.to(content, {
+        opacity: 0,
+        y: -24,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "40% top",
+          end: "95% top",
+          scrub: true,
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section style={{
+    <section ref={sectionRef} style={{
       position: "relative",
       height: "100vh",
-      minHeight: "600px",
+      minHeight: "620px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       overflow: "hidden",
     }}>
-      {/* Background image with overlay */}
-      <div style={{
-        position: "absolute", inset: 0,
+      {/* Background — ukuran dilebihkan supaya parallax tidak menyisakan celah */}
+      <div ref={bgRef} style={{
+        position: "absolute",
+        inset: "-15% 0",
         backgroundImage: "url(https://images.unsplash.com/photo-1500622944204-b135684e99fd?w=1800&q=80)",
         backgroundSize: "cover",
-        backgroundPosition: "center 30%",
-      }} />
-      <div style={{
-        position: "absolute", inset: 0,
-        background: "linear-gradient(to bottom, rgba(13,31,23,0.3) 0%, rgba(13,31,23,0.6) 50%, rgba(13,31,23,0.95) 100%)",
+        backgroundPosition: "center 40%",
+        willChange: "transform",
       }} />
 
-      {/* Subtle grain texture overlay */}
       <div style={{
         position: "absolute", inset: 0,
-        backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E\")",
-        opacity: 0.4,
+        background: "linear-gradient(180deg, rgba(13,31,23,0.25) 0%, rgba(13,31,23,0.55) 45%, rgba(13,31,23,0.97) 100%)",
         pointerEvents: "none",
       }} />
 
-      {/* Content */}
-      <div style={{
+      {/* Konten */}
+      <div ref={contentRef} style={{
         position: "relative",
         textAlign: "center",
         padding: "0 1.5rem",
-        maxWidth: "820px",
+        maxWidth: "840px",
+        width: "100%",
       }}>
-        {/* Eyebrow label */}
-        <div ref={subtitleRef} style={{
-          display: "inline-flex", alignItems: "center", gap: "8px",
-          marginBottom: "1.5rem",
-          padding: "6px 16px",
-          border: "1px solid rgba(90,176,138,0.3)",
+        <div data-animate style={{
+          display: "inline-flex", alignItems: "center", gap: "10px",
+          marginBottom: "1.75rem",
+          padding: "6px 18px",
+          border: "1px solid rgba(90,176,138,0.28)",
           borderRadius: "100px",
-          fontSize: "0.75rem",
-          letterSpacing: "0.15em",
+          fontSize: "0.72rem",
+          letterSpacing: "0.18em",
           textTransform: "uppercase",
           color: "var(--leaf)",
           fontFamily: "var(--font-mono)",
+          background: "rgba(13,31,23,0.3)",
         }}>
-          <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--leaf)", display: "inline-block" }} />
+          <span style={{
+            width: "5px", height: "5px", borderRadius: "50%",
+            background: "var(--leaf)", display: "inline-block",
+          }} />
           Ekowisata Berkelanjutan · Pulau Sumatra
         </div>
 
-        {/* Main title */}
-        <h1 ref={titleRef} style={{
+        {/* Judul — satu blok, tidak dipecah per baris supaya tidak ada
+            perbedaan tinggi yang bikin layout "loncat" saat animasi jalan */}
+        <h1 data-animate style={{
           fontFamily: "var(--font-display)",
-          fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
+          fontSize: "clamp(2.8rem, 7vw, 5.6rem)",
           fontWeight: 700,
-          lineHeight: 1.08,
+          lineHeight: 1.06,
           color: "var(--white)",
-          marginBottom: "1.5rem",
-          letterSpacing: "-0.02em",
+          marginBottom: "1.6rem",
+          letterSpacing: "-0.025em",
         }}>
           Hutan Sumatra<br />
           <em style={{ color: "var(--leaf)", fontStyle: "italic" }}>masih menunggu</em><br />
           untuk dijaga
         </h1>
 
-        {/* Subtitle */}
-        <p style={{
-          fontSize: "clamp(1rem, 2vw, 1.15rem)",
+        <p data-animate style={{
+          fontSize: "clamp(0.95rem, 2vw, 1.12rem)",
           color: "var(--mist)",
-          maxWidth: "560px",
+          maxWidth: "540px",
           margin: "0 auto 2.5rem",
           fontWeight: 300,
-          lineHeight: 1.7,
+          lineHeight: 1.75,
         }}>
           Sembilan destinasi ekowisata dari ujung Aceh hingga Lampung — tempat di mana alam dan komunitas lokal saling menjaga satu sama lain.
         </p>
 
-        {/* CTA buttons */}
-        <div ref={ctaRef} style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="#destinasi" style={{
-            display: "inline-flex", alignItems: "center", gap: "8px",
-            padding: "14px 32px",
-            background: "var(--leaf)",
-            color: "var(--forest)",
-            borderRadius: "100px",
-            fontSize: "0.9rem",
-            fontWeight: 600,
-            letterSpacing: "0.02em",
-            transition: "all 0.25s",
-          }}
-            onMouseEnter={e => { e.currentTarget.style.background = "var(--fern)"; e.currentTarget.style.color = "var(--white)"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "var(--leaf)"; e.currentTarget.style.color = "var(--forest)"; }}
-          >
-            Mulai Jelajahi
-            <span style={{ fontSize: "1rem" }}>↓</span>
-          </a>
-          <a href="#tentang" style={{
-            display: "inline-flex", alignItems: "center", gap: "8px",
-            padding: "14px 32px",
-            background: "transparent",
-            color: "var(--mist)",
-            borderRadius: "100px",
-            border: "1px solid rgba(168,201,184,0.3)",
-            fontSize: "0.9rem",
-            fontWeight: 400,
-            letterSpacing: "0.02em",
-            transition: "all 0.25s",
-          }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--mist)"; e.currentTarget.style.color = "var(--white)"; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(168,201,184,0.3)"; e.currentTarget.style.color = "var(--mist)"; }}
-          >
-            Pelajari Lebih Lanjut
-          </a>
+        <div data-animate style={{
+          display: "flex", gap: "1rem",
+          justifyContent: "center", flexWrap: "wrap",
+        }}>
+          <a href="#destinasi" className="btn-primary">Mulai Jelajahi →</a>
+          <a href="#tentang" className="btn-ghost">Pelajari Lebih Lanjut</a>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div style={{
-        position: "absolute", bottom: "2rem", left: "50%", transform: "translateX(-50%)",
-        display: "flex", flexDirection: "column", alignItems: "center", gap: "8px",
-        color: "var(--mist)", fontSize: "0.7rem", letterSpacing: "0.1em",
-        textTransform: "uppercase", fontFamily: "var(--font-mono)",
-        animation: "float 2s ease-in-out infinite",
-      }}>
-        <span>Scroll</span>
-        <div style={{
-          width: "1px", height: "40px",
-          background: "linear-gradient(to bottom, var(--mist), transparent)",
-        }} />
-      </div>
-
       <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateX(-50%) translateY(0); }
-          50% { transform: translateX(-50%) translateY(6px); }
+        .btn-primary {
+          display: inline-flex; align-items: center;
+          padding: 13px 30px;
+          background: var(--leaf);
+          color: var(--forest);
+          border-radius: 100px;
+          font-size: 0.88rem;
+          font-weight: 600;
+          letter-spacing: 0.03em;
+          transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+          text-decoration: none;
         }
+        .btn-primary:hover { background: var(--fern); color: var(--white); transform: translateY(-2px); }
+        .btn-ghost {
+          display: inline-flex; align-items: center;
+          padding: 13px 30px;
+          background: transparent;
+          color: var(--mist);
+          border-radius: 100px;
+          border: 1px solid rgba(168,201,184,0.25);
+          font-size: 0.88rem;
+          font-weight: 400;
+          letter-spacing: 0.03em;
+          transition: border-color 0.2s, color 0.2s, transform 0.2s;
+          text-decoration: none;
+        }
+        .btn-ghost:hover { border-color: var(--mist); color: var(--white); transform: translateY(-2px); }
       `}</style>
     </section>
   );
