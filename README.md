@@ -60,4 +60,16 @@ pnpm start
 
 ---
 
-*Submitted by the Salingka Team for BYTESFEST 2026.*
+---
+
+## 👥 Tim
+
+**Anomali Digital** — BYTESFEST 2026, SDGs Creative Web Competition
+
+| No | Nama |
+|----|------|
+| 1  | Nadya Salsabila |
+| 2  | Sabrina Arfanindia D |
+| 3  | Deron Garcia |
+
+*Submitted by **Anomali Digital** for BYTESFEST 2026.*
