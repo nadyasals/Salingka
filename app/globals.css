@@ -1,0 +1,360 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-display), ui-serif, Georgia, serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ── Jungle-depth utilities (merged) ───────────────────────────────────── */
+
+@utility text-glow {
+  text-shadow: 0 0 40px oklch(0.78 0.14 195 / 0.4), 0 2px 30px oklch(0 0 0 / 0.6);
+}
+
+@utility drift-slow {
+  animation: drift 22s ease-in-out infinite alternate;
+}
+
+/* ── Liquid Glass utilities (adopted from liquid-glass pattern) ─────────── */
+
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.01);
+  background-blend-mode: luminosity;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.10);
+  position: relative;
+  overflow: hidden;
+}
+
+.light .liquid-glass {
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    0 1px 4px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.45) 0%,
+    rgba(255,255,255,0.15) 20%,
+    rgba(255,255,255,0)    40%,
+    rgba(255,255,255,0)    60%,
+    rgba(255,255,255,0.15) 80%,
+    rgba(255,255,255,0.45) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.light .liquid-glass::before {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.90) 0%,
+    rgba(255,255,255,0.30) 20%,
+    rgba(255,255,255,0)    40%,
+    rgba(255,255,255,0)    60%,
+    rgba(255,255,255,0.30) 80%,
+    rgba(255,255,255,0.90) 100%
+  );
+}
+
+.liquid-glass-strong {
+  background: rgba(255, 255, 255, 0.04);
+  background-blend-mode: luminosity;
+  -webkit-backdrop-filter: blur(50px);
+  backdrop-filter: blur(50px);
+  box-shadow:
+    4px 4px 4px rgba(0,0,0,0.05),
+    inset 0 1px 1px rgba(255,255,255,0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.light .liquid-glass-strong {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.liquid-glass-strong::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.50) 0%,
+    rgba(255,255,255,0.20) 20%,
+    rgba(255,255,255,0)    40%,
+    rgba(255,255,255,0)    60%,
+    rgba(255,255,255,0.20) 80%,
+    rgba(255,255,255,0.50) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.light .liquid-glass-strong::before {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.95) 0%,
+    rgba(255,255,255,0.40) 20%,
+    rgba(255,255,255,0)    40%,
+    rgba(255,255,255,0)    60%,
+    rgba(255,255,255,0.40) 80%,
+    rgba(255,255,255,0.95) 100%
+  );
+}
+
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(40px, -20px, 0); }
+}
+
+/* Salingka — Eco Journey: deep forest night × tech-luxury */
+:root {
+  color-scheme: dark;
+  --background: oklch(0.13 0.022 175);
+  --foreground: oklch(0.95 0.012 140);
+  --card: oklch(0.18 0.025 175);
+  --card-foreground: oklch(0.95 0.012 140);
+  --popover: oklch(0.18 0.025 175);
+  --popover-foreground: oklch(0.95 0.012 140);
+  /* firefly amber */
+  --primary: oklch(0.82 0.14 85);
+  --primary-foreground: oklch(0.15 0.05 85);
+  /* moss green */
+  --secondary: oklch(0.28 0.05 160);
+  --secondary-foreground: oklch(0.95 0.012 140);
+  --muted: oklch(0.21 0.028 175);
+  --muted-foreground: oklch(0.62 0.02 155);
+  --accent: oklch(0.42 0.07 165);
+  --accent-foreground: oklch(0.96 0.012 140);
+  --destructive: oklch(0.6 0.2 25);
+  --border: oklch(0.95 0.012 140 / 10%);
+  --input: oklch(0.95 0.012 140 / 12%);
+  --ring: oklch(0.82 0.14 85);
+  --chart-1: oklch(0.82 0.14 85);
+  --chart-2: oklch(0.55 0.09 165);
+  --chart-3: oklch(0.45 0.07 165);
+  --chart-4: oklch(0.68 0.02 155);
+  --chart-5: oklch(0.32 0.05 160);
+  --radius: 0.375rem;
+  --sidebar: oklch(0.18 0.025 175);
+  --sidebar-foreground: oklch(0.95 0.012 140);
+  --sidebar-primary: oklch(0.82 0.14 85);
+  --sidebar-primary-foreground: oklch(0.15 0.05 85);
+  --sidebar-accent: oklch(0.28 0.05 160);
+  --sidebar-accent-foreground: oklch(0.95 0.012 140);
+  --sidebar-border: oklch(0.95 0.012 140 / 10%);
+  --sidebar-ring: oklch(0.82 0.14 85);
+}
+
+/* Light mode overrides - Warm Sunrise Gradient Theme */
+.light {
+  --color-white: oklch(0.18 0.03 165); /* dark forest green instead of white for contrast */
+  color-scheme: light;
+  --background: oklch(0.96 0.01 120); /* will be overridden by gradient */
+  --foreground: oklch(0.25 0.04 145);  /* deeper forest tone for better contrast */
+  --card: oklch(0.97 0.012 110);       /* slightly warmer white cards */
+  --card-foreground: oklch(0.25 0.04 145);
+  --popover: oklch(0.97 0.012 110);
+  --popover-foreground: oklch(0.25 0.04 145);
+  
+  /* primary gold: warmer, more vibrant */
+  --primary: oklch(0.62 0.14 75);
+  --primary-foreground: oklch(0.99 0.01 75);
+  
+  /* secondary: warm earth tone */
+  --secondary: oklch(0.86 0.03 135);
+  --secondary-foreground: oklch(0.25 0.04 145);
+  
+  --muted: oklch(0.89 0.02 125);
+  --muted-foreground: oklch(0.48 0.03 145);
+  --accent: oklch(0.80 0.045 140);
+  --accent-foreground: oklch(0.25 0.04 145);
+  
+  --border: oklch(0.25 0.04 145 / 12%);
+  --input: oklch(0.25 0.04 145 / 14%);
+  --ring: oklch(0.62 0.14 75);
+  
+  --sidebar: oklch(0.97 0.012 110);
+  --sidebar-foreground: oklch(0.25 0.04 145);
+  --sidebar-primary: oklch(0.62 0.14 75);
+  --sidebar-primary-foreground: oklch(0.99 0.01 75);
+  --sidebar-accent: oklch(0.86 0.03 135);
+  --sidebar-accent-foreground: oklch(0.25 0.04 145);
+  --sidebar-border: oklch(0.25 0.04 145 / 12%);
+  --sidebar-ring: oklch(0.62 0.14 75);
+}
+
+/* Light mode: Warm gradient background (sunrise → sand) */
+.light body {
+  background: linear-gradient(
+    to bottom,
+    oklch(0.97 0.015 95) 0%,    /* soft cream sky */
+    oklch(0.95 0.02 105) 30%,   /* warm transition */
+    oklch(0.93 0.025 110) 100%  /* sandy earth */
+  );
+  background-attachment: fixed;
+}
+
+/* Ensure the hero section and mobile menu always keep white text since they have a dark background */
+#hero, #mobile-menu {
+  --color-white: #ffffff !important;
+}
+
+/* Hero section: force dark glass morphism in both modes for consistency */
+#hero .liquid-glass-strong {
+  background: rgba(255, 255, 255, 0.04) !important;
+  box-shadow:
+    4px 4px 4px rgba(0,0,0,0.05),
+    inset 0 1px 1px rgba(255,255,255,0.15) !important;
+}
+
+#hero .liquid-glass-strong::before {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.50) 0%,
+    rgba(255,255,255,0.20) 20%,
+    rgba(255,255,255,0)    40%,
+    rgba(255,255,255,0)    60%,
+    rgba(255,255,255,0.20) 80%,
+    rgba(255,255,255,0.50) 100%
+  ) !important;
+}
+
+/* Navbar: force dark glass morphism in both modes (floating navbar + utilities capsule) */
+header .liquid-glass-strong {
+  background: rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(50px) !important;
+  box-shadow:
+    4px 4px 4px rgba(0,0,0,0.05),
+    inset 0 1px 1px rgba(255,255,255,0.15) !important;
+}
+
+header .liquid-glass-strong::before {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.50) 0%,
+    rgba(255,255,255,0.20) 20%,
+    rgba(255,255,255,0)    40%,
+    rgba(255,255,255,0)    60%,
+    rgba(255,255,255,0.20) 80%,
+    rgba(255,255,255,0.50) 100%
+  ) !important;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    scroll-behavior: smooth;
+  }
+  ::selection {
+    background: oklch(0.82 0.14 85 / 30%);
+    color: oklch(0.95 0.012 140);
+  }
+  .light ::selection {
+    background: oklch(0.82 0.14 85 / 25%);
+    color: oklch(0.18 0.03 165);
+  }
+}
+
+/* ── Keyframes ──────────────────────────────────────────────────────────── */
+
+@keyframes firefly-drift {
+  0%, 100% { transform: translate(0, 0); opacity: 0; }
+  10%       { opacity: 1; }
+  50%       { transform: translate(var(--drift-x, 30px), var(--drift-y, -40px)); opacity: 0.6; }
+  90%       { opacity: 1; }
+}
+
+@keyframes mist-flow {
+  0%   { transform: translateX(-10%) scale(1.1); }
+  50%  { transform: translateX(6%) scale(1.15); }
+  100% { transform: translateX(-10%) scale(1.1); }
+}
+
+@keyframes leaf-fall {
+  0%   { transform: translateY(-5vh) translateX(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.7; }
+  100% { transform: translateY(105vh) translateX(var(--sway, 60px)) rotate(320deg); opacity: 0; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px oklch(0.82 0.14 85 / 0.3), 0 0 40px oklch(0.82 0.14 85 / 0.1); }
+  50%       { box-shadow: 0 0 30px oklch(0.82 0.14 85 / 0.5), 0 0 60px oklch(0.82 0.14 85 / 0.2); }
+}
+
+@keyframes float-up {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
