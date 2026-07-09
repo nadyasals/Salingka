@@ -52,7 +52,7 @@ export function BlurText({
       style={{
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'inherit',
+        justifyContent: 'center',
         rowGap: '0.1em',
       }}
       aria-label={text}
