@@ -555,10 +555,10 @@ export function Packages() {
                   /* BOOKING FORM STATE */
                   <form onSubmit={handleConfirmBooking} className="flex flex-col gap-5 pr-1">
                     <div>
-                      <h4 className="font-serif text-2xl text-white leading-tight">
+                      <h4 className="font-serif text-2xl text-foreground leading-tight">
                         {lang === 'id' ? 'Pesan Tempat Anda' : 'Secure Your Spot'}
                       </h4>
-                      <p className="text-[10px] uppercase tracking-wider text-white/40 mt-1">
+                      <p className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">
                         {lang === 'id' ? 'Simulasi Permintaan Ekspedisi' : 'Expedition Request Sandbox'}
                       </p>
                     </div>
@@ -567,36 +567,36 @@ export function Packages() {
 
                     {/* Full Name */}
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-[9px] uppercase tracking-widest text-white/50 font-semibold pl-1">
+                      <label className="text-[9px] uppercase tracking-widest text-muted-foreground font-semibold pl-1">
                         {lang === 'id' ? 'Nama Lengkap' : 'Full Name'}
                       </label>
                       <div className="relative">
-                        <FiUser className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/30" />
+                        <FiUser className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground/50" />
                         <input
                           required
                           type="text"
                           value={fullName}
                           onChange={(e) => setFullName(e.target.value)}
                           placeholder={lang === 'id' ? 'contoh: Alexander Mercer' : 'e.g. Alexander Mercer'}
-                          className="w-full rounded-xl border border-white/10 bg-white/5 py-2.5 pl-10 pr-4 text-xs tracking-wider text-white placeholder-white/20 outline-none focus:border-primary/50 focus:bg-white/10 transition-all"
+                          className="w-full rounded-xl border border-foreground/10 bg-foreground/5 py-2.5 pl-10 pr-4 text-xs tracking-wider text-foreground placeholder-foreground/20 outline-none focus:border-primary/50 focus:bg-foreground/10 transition-all"
                         />
                       </div>
                     </div>
 
                     {/* Email */}
                     <div className="flex flex-col gap-1.5">
-                      <label className="text-[9px] uppercase tracking-widest text-white/50 font-semibold pl-1">
+                      <label className="text-[9px] uppercase tracking-widest text-muted-foreground font-semibold pl-1">
                         {lang === 'id' ? 'Alamat Email' : 'Email Address'}
                       </label>
                       <div className="relative">
-                        <FiMail className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-white/30" />
+                        <FiMail className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground/50" />
                         <input
                           required
                           type="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder={lang === 'id' ? 'contoh: alex@example.com' : 'e.g. alex@example.com'}
-                          className="w-full rounded-xl border border-white/10 bg-white/5 py-2.5 pl-10 pr-4 text-xs tracking-wider text-white placeholder-white/20 outline-none focus:border-primary/50 focus:bg-white/10 transition-all"
+                          className="w-full rounded-xl border border-foreground/10 bg-foreground/5 py-2.5 pl-10 pr-4 text-xs tracking-wider text-foreground placeholder-foreground/20 outline-none focus:border-primary/50 focus:bg-foreground/10 transition-all"
                         />
                       </div>
                     </div>
@@ -606,7 +606,7 @@ export function Packages() {
                       
                       {/* Date Picker */}
                       <div className="flex flex-col gap-1.5">
-                        <label className="text-[9px] uppercase tracking-widest text-white/50 font-semibold pl-1">
+                        <label className="text-[9px] uppercase tracking-widest text-muted-foreground font-semibold pl-1">
                           {lang === 'id' ? 'Tanggal Keberangkatan' : 'Departure Date'}
                         </label>
                         <div className="relative">
@@ -616,32 +616,32 @@ export function Packages() {
                             min={getTomorrowString()}
                             value={travelDate}
                             onChange={(e) => setTravelDate(e.target.value)}
-                            className="w-full rounded-xl border border-white/10 bg-white/5 py-2.5 px-3 text-xs tracking-wider text-white outline-none focus:border-primary/50 focus:bg-white/10 transition-all custom-date-input"
+                            className="w-full rounded-xl border border-foreground/10 bg-foreground/5 py-2.5 px-3 text-xs tracking-wider text-foreground outline-none focus:border-primary/50 focus:bg-foreground/10 transition-all custom-date-input"
                           />
                         </div>
                       </div>
 
                       {/* Travelers Selector */}
                       <div className="flex flex-col gap-1.5">
-                        <label className="text-[9px] uppercase tracking-widest text-white/50 font-semibold pl-1">
+                        <label className="text-[9px] uppercase tracking-widest text-muted-foreground font-semibold pl-1">
                           {lang === 'id' ? 'Jumlah Wisatawan' : 'Travelers'}
                         </label>
-                        <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 py-1 px-1.5 w-full">
+                        <div className="flex items-center justify-between rounded-xl border border-foreground/10 bg-foreground/5 py-1 px-1.5 w-full">
                           <button
                             type="button"
                             disabled={travelers <= 1}
                             onClick={() => setTravelers(t => Math.max(1, t - 1))}
-                            className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/10 text-white disabled:opacity-30 disabled:hover:bg-transparent transition-all cursor-pointer"
+                            className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-foreground/10 text-foreground disabled:opacity-30 disabled:hover:bg-transparent transition-all cursor-pointer"
                           >
                             <FiMinus className="h-3.5 w-3.5" />
                           </button>
-                          <span className="text-xs font-mono font-bold text-white px-2">
+                          <span className="text-xs font-mono font-bold text-foreground px-2">
                             {travelers}
                           </span>
                           <button
                             type="button"
                             onClick={() => setTravelers(t => t + 1)}
-                            className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-white/10 text-white transition-all cursor-pointer"
+                            className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-foreground/10 text-foreground transition-all cursor-pointer"
                           >
                             <FiPlus className="h-3.5 w-3.5" />
                           </button>
@@ -651,16 +651,16 @@ export function Packages() {
                     </div>
 
                     {/* Pricing Calculator Summary Card */}
-                    <div className="rounded-xl border border-white/5 bg-white/[0.02] p-4 flex flex-col gap-2 mt-1">
-                      <div className="flex justify-between text-[11px] text-white/40">
+                    <div className="rounded-xl border border-foreground/5 bg-foreground/[0.02] p-4 flex flex-col gap-2 mt-1">
+                      <div className="flex justify-between text-[11px] text-muted-foreground">
                         <span>{lang === 'id' ? 'Tarif per orang:' : 'Rate per person:'}</span>
                         <span>{bookingPkg.price}</span>
                       </div>
-                      <div className="flex justify-between text-[11px] text-white/40 border-b border-white/5 pb-2">
+                      <div className="flex justify-between text-[11px] text-muted-foreground border-b border-foreground/5 pb-2">
                         <span>{lang === 'id' ? 'Total Wisatawan:' : 'Total Travelers:'}</span>
                         <span>{travelers} {lang === 'id' ? 'Orang' : 'Pax'}</span>
                       </div>
-                      <div className="flex justify-between text-xs font-bold text-white pt-1">
+                      <div className="flex justify-between text-xs font-bold text-foreground pt-1">
                         <span className="flex items-center gap-1.5">
                           {lang === 'id' ? 'Total Estimasi:' : 'Total Estimate:'}
                         </span>
@@ -708,7 +708,7 @@ export function Packages() {
 
                     {/* ── Promo Code Field ───────────────────────── */}
                     <div className="flex flex-col gap-2">
-                      <label className="text-[9px] uppercase tracking-widest text-white/50 font-semibold pl-1">
+                      <label className="text-[9px] uppercase tracking-widest text-muted-foreground font-semibold pl-1">
                         {lang === 'id' ? 'Kode Promo (Opsional)' : 'Promo Code (Optional)'}
                       </label>
                       <div className="flex gap-2">
@@ -721,19 +721,19 @@ export function Packages() {
                           }}
                           disabled={promoApplied}
                           placeholder={lang === 'id' ? 'contoh: LEUSERGREEN' : 'e.g. LEUSERGREEN'}
-                          className={`flex-1 rounded-xl border py-2.5 px-3 text-xs tracking-wider text-white placeholder-white/20 outline-none transition-all
+                          className={`flex-1 rounded-xl border py-2.5 px-3 text-xs tracking-wider text-foreground placeholder-foreground/20 outline-none transition-all
                             ${promoApplied
                               ? 'bg-emerald-950/30 border-emerald-500/40 text-emerald-400'
                               : promoError
                               ? 'bg-red-950/20 border-red-500/40'
-                              : 'bg-white/5 border-white/10 focus:border-primary/50 focus:bg-white/10'
+                              : 'bg-foreground/5 border-foreground/10 focus:border-primary/50 focus:bg-foreground/10'
                             }`}
                         />
                         {!promoApplied && (
                           <button
                             type="button"
                             onClick={handleApplyPromo}
-                            className="rounded-xl border border-white/10 px-4 text-[10px] font-semibold uppercase tracking-wider text-white/60 hover:border-white/30 hover:text-white transition-all cursor-pointer whitespace-nowrap"
+                            className="rounded-xl border border-foreground/10 px-4 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground hover:border-foreground/30 hover:text-foreground transition-all cursor-pointer whitespace-nowrap"
                           >
                             {lang === 'id' ? 'Terapkan' : 'Apply'}
                           </button>
@@ -799,7 +799,7 @@ export function Packages() {
                       <FiAward className="h-8 w-8" />
                     </motion.div>
 
-                    <h4 className="font-serif text-2xl text-white">
+                    <h4 className="font-serif text-2xl text-foreground">
                       {lang === 'id' ? 'Ekspedisi Terkunci' : 'Expedition Locked'}
                     </h4>
                     <p className="text-[10px] uppercase tracking-wider text-emerald-400 mt-1 font-semibold">
@@ -818,45 +818,45 @@ export function Packages() {
                       <div className="absolute -right-2.5 top-1/2 -translate-y-1/2 h-5 w-5 rounded-full bg-background/95 border-l border-white/10" />
 
                       <div className="flex justify-between">
-                        <span className="text-white/30">{lang === 'id' ? 'ID PEMESANAN:' : 'BOOKING ID:'}</span>
-                        <span className="text-white font-bold">{bookingId}</span>
+                        <span className="text-foreground/30">{lang === 'id' ? 'ID PEMESANAN:' : 'BOOKING ID:'}</span>
+                        <span className="text-foreground font-bold">{bookingId}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-white/30">{lang === 'id' ? 'KATEGORI:' : 'TIER:'}</span>
-                        <span className="text-white uppercase font-bold">{bookingPkg.tier} ({bookingPkg.days})</span>
+                        <span className="text-foreground/30">{lang === 'id' ? 'KATEGORI:' : 'TIER:'}</span>
+                        <span className="text-foreground uppercase font-bold">{bookingPkg.tier} ({bookingPkg.days})</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-white/30">{lang === 'id' ? 'TANGGAL:' : 'DATE:'}</span>
-                        <span className="text-white">{travelDate}</span>
+                        <span className="text-foreground/30">{lang === 'id' ? 'TANGGAL:' : 'DATE:'}</span>
+                        <span className="text-foreground">{travelDate}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-white/30">{lang === 'id' ? 'WISATAWAN:' : 'PASSENGERS:'}</span>
-                        <span className="text-white">{travelers} {lang === 'id' ? 'Wisatawan' : 'Traveler(s)'}</span>
+                        <span className="text-foreground/30">{lang === 'id' ? 'WISATAWAN:' : 'PASSENGERS:'}</span>
+                        <span className="text-foreground">{travelers} {lang === 'id' ? 'Wisatawan' : 'Traveler(s)'}</span>
                       </div>
-                      <div className="h-px border-t border-dashed border-white/10 my-1" />
+                      <div className="h-px border-t border-dashed border-foreground/10 my-1" />
                       <div className="flex justify-between text-xs">
-                        <span className="text-white/30 font-bold">{lang === 'id' ? 'TOTAL ESTIMASI:' : 'TOTAL ESTIMATE:'}</span>
+                        <span className="text-foreground/30 font-bold">{lang === 'id' ? 'TOTAL ESTIMASI:' : 'TOTAL ESTIMATE:'}</span>
                         <span className="font-bold" style={{ color: bookingPkg.accentColor }}>
                           {formatIDR(bookingPkg.numericPrice * travelers)}
                         </span>
                       </div>
-                      <div className="h-px border-t border-dashed border-white/10 my-1" />
+                      <div className="h-px border-t border-dashed border-foreground/10 my-1" />
                       <div className="flex flex-col gap-1 text-[10px]">
-                        <span className="text-emerald-400 font-bold tracking-wider uppercase flex items-center gap-1.5">
-                          <IoLeaf className="h-3 w-3 text-emerald-400" />
+                        <span className="text-emerald-600 dark:text-emerald-400 font-bold tracking-wider uppercase flex items-center gap-1.5">
+                          <IoLeaf className="h-3 w-3" />
                           {lang === 'id' ? 'Eco-Impact Terkunci:' : 'Eco-Impact Locked:'}
                         </span>
                         <div className="flex justify-between pl-1">
-                          <span className="text-white/30">{lang === 'id' ? 'Pohon Ditanam:' : 'Trees Planted:'}</span>
-                          <span className="text-white">{travelers * (bookingPkg.id === 'explorer' ? 2 : bookingPkg.id === 'ranger' ? 5 : 10)} {lang === 'id' ? 'Pohon' : 'Trees'}</span>
+                          <span className="text-foreground/30">{lang === 'id' ? 'Pohon Ditanam:' : 'Trees Planted:'}</span>
+                          <span className="text-foreground">{travelers * (bookingPkg.id === 'explorer' ? 2 : bookingPkg.id === 'ranger' ? 5 : 10)} {lang === 'id' ? 'Pohon' : 'Trees'}</span>
                         </div>
                         <div className="flex justify-between pl-1">
-                          <span className="text-white/30">{lang === 'id' ? 'Patroli Ranger:' : 'Ranger Patrols:'}</span>
-                          <span className="text-white">{travelers * (bookingPkg.id === 'explorer' ? 12 : bookingPkg.id === 'ranger' ? 24 : 48)} {lang === 'id' ? 'Jam' : 'Hours'}</span>
+                          <span className="text-foreground/30">{lang === 'id' ? 'Patroli Ranger:' : 'Ranger Patrols:'}</span>
+                          <span className="text-foreground">{travelers * (bookingPkg.id === 'explorer' ? 12 : bookingPkg.id === 'ranger' ? 24 : 48)} {lang === 'id' ? 'Jam' : 'Hours'}</span>
                         </div>
                         <div className="flex justify-between pl-1">
-                          <span className="text-white/30">{lang === 'id' ? 'Upah Layak Pemandu:' : 'Fair Guide Wage:'}</span>
-                          <span className="text-white">{travelers * (bookingPkg.id === 'explorer' ? 2 : bookingPkg.id === 'ranger' ? 4 : 7)} {lang === 'id' ? 'Hari' : 'Days'}</span>
+                          <span className="text-foreground/30">{lang === 'id' ? 'Upah Layak Pemandu:' : 'Fair Guide Wage:'}</span>
+                          <span className="text-foreground">{travelers * (bookingPkg.id === 'explorer' ? 2 : bookingPkg.id === 'ranger' ? 4 : 7)} {lang === 'id' ? 'Hari' : 'Days'}</span>
                         </div>
 
                         {/* Promo bonus row — only visible if LEUSERGREEN was applied */}
@@ -878,14 +878,14 @@ export function Packages() {
                       </div>
                     </div>
 
-                    <p className="text-xs text-white/50 leading-relaxed max-w-sm mb-6">
+                    <p className="text-xs text-foreground/50 leading-relaxed max-w-sm mb-6">
                       {lang === 'id' ? (
                         <>
-                          Terima kasih, <span className="text-white font-semibold">{fullName}</span>! Permintaan ekspedisi Sumatra Anda telah terdaftar. Penjaga hutan ekologis lokal kami akan mengirimkan email ke <span className="text-white font-semibold">{email}</span> dalam waktu 24 jam untuk koordinasi pemandu.
+                          Terima kasih, <span className="text-foreground font-semibold">{fullName}</span>! Permintaan ekspedisi Sumatra Anda telah terdaftar. Penjaga hutan ekologis lokal kami akan mengirimkan email ke <span className="text-foreground font-semibold">{email}</span> dalam waktu 24 jam untuk koordinasi pemandu.
                         </>
                       ) : (
                         <>
-                          Thank you, <span className="text-white font-semibold">{fullName}</span>! Your Sumatran expedition inquiry has been registered. Our local eco-rangers will email you at <span className="text-white font-semibold">{email}</span> within 24 hours to coordinate guide assignments.
+                          Thank you, <span className="text-foreground font-semibold">{fullName}</span>! Your Sumatran expedition inquiry has been registered. Our local eco-rangers will email you at <span className="text-foreground font-semibold">{email}</span> within 24 hours to coordinate guide assignments.
                         </>
                       )}
                     </p>

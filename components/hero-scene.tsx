@@ -114,7 +114,7 @@ export function HeroScene() {
           className="pointer-events-none absolute inset-0 z-[5]"
           style={{
             background:
-              'radial-gradient(120% 90% at 50% 20%, transparent 40%, oklch(0.13 0.022 175 / 0.85))',
+              'radial-gradient(120% 90% at 50% 20%, transparent 40%, oklch(0 0 0 / 0.75))',
           }}
         />
 

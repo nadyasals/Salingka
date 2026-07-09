@@ -418,7 +418,7 @@ export function Journey() {
   })
 
   return (
-    <section className="relative bg-background text-white py-24 md:py-40" id="journey" aria-label="The journey deeper">
+    <section className="relative bg-background py-24 md:py-40" id="journey" aria-label="The journey deeper">
       {/* Sumatran nature ambient glow — jungle green left, river teal right */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Kanopi hutan — deep emerald green */}
@@ -443,7 +443,7 @@ export function Journey() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="font-serif text-4xl md:text-6xl font-medium leading-tight max-w-3xl text-balance"
+            className="font-serif text-4xl md:text-6xl font-medium leading-tight max-w-3xl text-balance text-foreground"
           >
             {lang === 'id' 
               ? 'Setiap langkah membawamu lebih dalam ke dunia yang lebih tua dari ingatan'
@@ -473,7 +473,7 @@ export function Journey() {
             </div>
 
             {/* Counter bar */}
-            <div className="flex items-center justify-between text-[10px] font-mono tracking-[0.2em] text-white/40 uppercase px-1">
+            <div className="flex items-center justify-between text-[10px] font-mono tracking-[0.2em] text-foreground/40 uppercase px-1">
               <span>{lang === 'id' ? 'Spektrum Bab' : 'Chapter Spectrum'}</span>
               <div className="flex items-center gap-1">
                 <div className="relative h-4 overflow-hidden w-6 text-right">
@@ -484,7 +484,7 @@ export function Journey() {
                       animate={{ y: 0, opacity: 1 }}
                       exit={{ y: -12, opacity: 0 }}
                       transition={{ duration: 0.35, ease: 'easeOut' }}
-                      className="absolute right-0 text-white font-semibold"
+                      className="absolute right-0 text-foreground font-semibold"
                     >
                       {String(activeChapter + 1).padStart(2, '0')}
                     </motion.div>
@@ -498,7 +498,7 @@ export function Journey() {
 
           {/* RIGHT SIDE: Scrollable Narration List */}
           <div className="md:col-span-7 flex flex-col gap-4">
-            <div className="text-[10px] font-mono tracking-[0.25em] text-white/30 uppercase mb-4 hidden md:block">
+            <div className="text-[10px] font-mono tracking-[0.25em] text-foreground/30 uppercase mb-4 hidden md:block">
               {lang === 'id' ? 'Jelajah · Lindungi · Hubungkan' : 'Traverse · Protect · Reconnect'}
             </div>
 
@@ -508,7 +508,7 @@ export function Journey() {
                 <div
                   key={ch.index}
                   onClick={() => handleChapterClick(idx)}
-                  className="group cursor-pointer border-b border-white/5 py-10 transition-all duration-500 last:border-0"
+                  className="group cursor-pointer border-b border-foreground/5 py-10 transition-all duration-500 last:border-0"
                 >
                   {/* Category marker */}
                   <div className="flex items-center gap-3 text-[10px] font-mono tracking-widest text-primary uppercase">
@@ -526,7 +526,7 @@ export function Journey() {
                   <div className="mt-4 flex items-start justify-between gap-4">
                     <h3
                       className={`font-serif text-2xl md:text-[2.2rem] leading-tight font-medium tracking-tight transition-colors duration-500 ${
-                        isActive ? 'text-white' : 'text-white/25 group-hover:text-white/55'
+                        isActive ? 'text-foreground' : 'text-foreground/25 group-hover:text-foreground/55'
                       }`}
                     >
                       {ch.title}
@@ -565,7 +565,7 @@ export function Journey() {
                         transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                         className="overflow-hidden"
                       >
-                        <p className="max-w-xl text-[14px] leading-[1.8] text-white/55 text-pretty font-light">
+                        <p className="max-w-xl text-[14px] leading-[1.8] text-foreground/60 text-pretty font-light">
                            {ch.body}
                         </p>
                       </motion.div>

@@ -110,12 +110,12 @@ export function Atmosphere() {
         </span>
       ))}
 
-      {/* Bottom mist gradient — grounds the scene */}
+      {/* Bottom mist gradient — grounds the scene (matches bg in both modes) */}
       <div
         className="absolute inset-x-0 bottom-0 h-1/3"
         style={{
           background:
-            'linear-gradient(to top, oklch(0.13 0.022 175) 0%, transparent 60%)',
+            'linear-gradient(to top, var(--background) 0%, transparent 60%)',
         }}
       />
     </div>

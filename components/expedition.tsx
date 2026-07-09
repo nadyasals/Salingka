@@ -92,7 +92,7 @@ export function Expedition() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 1, delay: 0.35 }}
-          href="#"
+          href="#packages"
           className="mt-10 inline-flex items-center gap-3 rounded-full bg-primary px-8 py-4 text-sm font-medium uppercase tracking-[0.2em] text-primary-foreground transition-transform hover:scale-105"
         >
           {lang === 'id' ? 'Mulai Ekspedisi' : 'Begin your expedition'}
