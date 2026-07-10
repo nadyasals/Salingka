@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { IoLeaf } from 'react-icons/io5'
-import { FiSun, FiMoon, FiArrowRight } from 'react-icons/fi'
+import { FiSun, FiMoon, FiArrowRight, FiVolume2, FiVolumeX } from 'react-icons/fi'
 import { useLanguage } from '@/components/language-context'
 import { useTheme } from '@/components/theme-context'
 
@@ -14,8 +14,51 @@ type NavbarProps = {
 export function Navbar({ floating = false }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [audioPlaying, setAudioPlaying] = useState(false)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const fadeRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const { lang, toggleLang } = useLanguage()
   const { theme, toggleTheme } = useTheme()
+
+  // Initialise audio element once on client
+  useEffect(() => {
+    const audio = new Audio('/audio/ambient-forest.mp3')
+    audio.loop = true
+    audio.volume = 0
+    audioRef.current = audio
+    return () => {
+      audio.pause()
+      audio.src = ''
+    }
+  }, [])
+
+  const fadeTo = (target: number, onDone?: () => void) => {
+    const audio = audioRef.current
+    if (!audio) return
+    if (fadeRef.current) clearInterval(fadeRef.current)
+    const step = target > audio.volume ? 0.01 : -0.01
+    fadeRef.current = setInterval(() => {
+      if (!audioRef.current) return
+      const next = Math.min(Math.max(audioRef.current.volume + step, 0), 0.22)
+      audioRef.current.volume = next
+      if ((step > 0 && next >= target) || (step < 0 && next <= target)) {
+        clearInterval(fadeRef.current!)
+        onDone?.()
+      }
+    }, 40)
+  }
+
+  const toggleAudio = () => {
+    const audio = audioRef.current
+    if (!audio) return
+    if (audioPlaying) {
+      fadeTo(0, () => audio.pause())
+      setAudioPlaying(false)
+    } else {
+      audio.play().then(() => fadeTo(0.22))
+      setAudioPlaying(true)
+    }
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -144,6 +187,23 @@ export function Navbar({ floating = false }: NavbarProps) {
                 <FiMoon className="h-4 w-4 text-emerald-600" />
               )}
             </button>
+
+            {/* Audio Toggle */}
+            <button
+              onClick={toggleAudio}
+              className="flex items-center justify-center h-8 w-8 rounded-full border border-white/10 bg-white/[0.02] hover:bg-white/[0.06] transition-all cursor-pointer relative"
+              aria-label={audioPlaying ? 'Mute ambient sound' : 'Play ambient sound'}
+            >
+              {audioPlaying ? (
+                <FiVolume2 className="h-4 w-4 text-emerald-400" />
+              ) : (
+                <FiVolumeX className="h-4 w-4 text-white/50" />
+              )}
+              {/* Pulse ring when playing */}
+              {audioPlaying && (
+                <span className="absolute inset-0 rounded-full animate-ping border border-emerald-400/30" />
+              )}
+            </button>
           </div>
         )}
       </motion.header>
@@ -210,6 +270,26 @@ export function Navbar({ floating = false }: NavbarProps) {
                   <FiSun className="h-4 w-4 text-amber-400" />
                 ) : (
                   <FiMoon className="h-4 w-4 text-emerald-600" />
+                )}
+              </button>
+
+              {/* Audio Toggle — mobile */}
+              <button
+                onClick={toggleAudio}
+                className={`relative flex items-center justify-center h-10 w-10 rounded-full border transition-all cursor-pointer ${
+                  theme === 'dark'
+                    ? 'border-white/10 bg-white/[0.04]'
+                    : 'border-foreground/10 bg-foreground/[0.04]'
+                }`}
+                aria-label={audioPlaying ? 'Mute ambient sound' : 'Play ambient sound'}
+              >
+                {audioPlaying ? (
+                  <FiVolume2 className="h-4 w-4 text-emerald-400" />
+                ) : (
+                  <FiVolumeX className={`h-4 w-4 ${theme === 'dark' ? 'text-white/50' : 'text-foreground/50'}`} />
+                )}
+                {audioPlaying && (
+                  <span className="absolute inset-0 rounded-full animate-ping border border-emerald-400/30" />
                 )}
               </button>
             </div>
