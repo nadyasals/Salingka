@@ -418,7 +418,7 @@ export function Journey() {
   })
 
   return (
-    <section className="relative bg-background py-24 md:py-40" id="journey" aria-label="The journey deeper">
+    <section className="relative bg-background py-16 md:py-40" id="journey" aria-label="The journey deeper">
       {/* Sumatran nature ambient glow — jungle green left, river teal right */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Kanopi hutan — deep emerald green */}
@@ -456,7 +456,7 @@ export function Journey() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-20">
           
           {/* LEFT SIDE: Sticky Image + Counter */}
-          <div className="md:col-span-5 flex flex-col gap-6 sticky top-24 md:top-32 self-start z-20">
+          <div className="md:col-span-5 flex flex-col gap-6 md:sticky md:top-32 md:self-start z-20">
             {/* Image frame wrapper */}
             <div className="liquid-glass-strong relative aspect-[4/3] md:aspect-[4/5] w-full overflow-hidden rounded-2xl shadow-2xl">
               <AnimatePresence mode="wait">
@@ -508,7 +508,7 @@ export function Journey() {
                 <div
                   key={ch.index}
                   onClick={() => handleChapterClick(idx)}
-                  className="group cursor-pointer border-b border-foreground/5 py-10 transition-all duration-500 last:border-0"
+                  className="group cursor-pointer border-b border-foreground/5 py-6 md:py-10 transition-all duration-500 last:border-0"
                 >
                   {/* Category marker */}
                   <div className="flex items-center gap-3 text-[10px] font-mono tracking-widest text-primary uppercase">
