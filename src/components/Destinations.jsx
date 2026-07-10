@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { destinations } from "../data/destinations";
 
-function DestCard({ dest, index }) {
+function DestCard({ dest, index, tall = false }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -10,7 +10,7 @@ function DestCard({ dest, index }) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold: 0.1 }
+      { threshold: 0.08 }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
@@ -26,12 +26,11 @@ function DestCard({ dest, index }) {
         borderRadius: "16px",
         overflow: "hidden",
         cursor: "pointer",
-        aspectRatio: index % 5 === 0 ? "4/3" : "3/4",
+        height: tall ? "520px" : "320px",
         background: dest.color,
         opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(40px)",
-        transition: `opacity 0.7s ease ${(index % 3) * 0.12}s, transform 0.7s ease ${(index % 3) * 0.12}s`,
-        gridColumn: index % 5 === 0 ? "span 2" : "span 1",
+        transform: visible ? "translateY(0)" : "translateY(32px)",
+        transition: `opacity 0.65s ease ${(index % 4) * 0.08}s, transform 0.65s ease ${(index % 4) * 0.08}s`,
       }}
     >
       {/* Image */}
@@ -45,16 +44,16 @@ function DestCard({ dest, index }) {
             position: "absolute", inset: 0,
             width: "100%", height: "100%",
             objectFit: "cover",
-            transform: hovered ? "scale(1.06)" : "scale(1)",
-            transition: "transform 0.6s ease",
+            transform: hovered ? "scale(1.05)" : "scale(1)",
+            transition: "transform 0.7s ease",
           }}
         />
       ) : (
         <div style={{
           position: "absolute", inset: 0,
           background: `linear-gradient(135deg, ${dest.color}, #0D1F17)`,
-          display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: "3rem",
+          display: "flex", alignItems: "center",
+          justifyContent: "center", fontSize: "3rem",
         }}>🌿</div>
       )}
 
@@ -62,19 +61,19 @@ function DestCard({ dest, index }) {
       <div style={{
         position: "absolute", inset: 0,
         background: hovered
-          ? "linear-gradient(to top, rgba(13,31,23,0.95) 0%, rgba(13,31,23,0.3) 60%, rgba(13,31,23,0.1) 100%)"
-          : "linear-gradient(to top, rgba(13,31,23,0.85) 0%, rgba(13,31,23,0.1) 60%, transparent 100%)",
+          ? "linear-gradient(to top, rgba(13,31,23,0.96) 0%, rgba(13,31,23,0.4) 55%, rgba(13,31,23,0.05) 100%)"
+          : "linear-gradient(to top, rgba(13,31,23,0.88) 0%, rgba(13,31,23,0.15) 55%, transparent 100%)",
         transition: "background 0.4s ease",
       }} />
 
-      {/* Province label */}
+      {/* Province */}
       <div style={{
         position: "absolute", top: "1rem", left: "1rem",
         padding: "4px 12px",
-        background: "rgba(13,31,23,0.7)",
+        background: "rgba(13,31,23,0.65)",
         backdropFilter: "blur(8px)",
         borderRadius: "100px",
-        fontSize: "0.7rem",
+        fontSize: "0.68rem",
         fontFamily: "var(--font-mono)",
         color: "var(--leaf)",
         letterSpacing: "0.08em",
@@ -83,73 +82,80 @@ function DestCard({ dest, index }) {
         {dest.province}
       </div>
 
-      {/* SDG badges top right */}
+      {/* SDG badges */}
       <div style={{
         position: "absolute", top: "1rem", right: "1rem",
-        display: "flex", gap: "4px",
+        display: "flex", gap: "4px", flexWrap: "wrap", justifyContent: "flex-end",
+        maxWidth: "60%",
       }}>
         {dest.sdg.map(s => (
           <span key={s} style={{
             padding: "3px 8px",
-            background: "rgba(13,31,23,0.7)",
+            background: "rgba(13,31,23,0.65)",
             backdropFilter: "blur(8px)",
             borderRadius: "100px",
-            fontSize: "0.65rem",
+            fontSize: "0.62rem",
             fontFamily: "var(--font-mono)",
             color: "var(--mist)",
             border: "1px solid rgba(168,201,184,0.15)",
+            whiteSpace: "nowrap",
           }}>{s}</span>
         ))}
       </div>
 
-      {/* Content at bottom */}
+      {/* Content */}
       <div style={{
         position: "absolute", bottom: 0, left: 0, right: 0,
-        padding: "1.5rem",
-        transform: hovered ? "translateY(0)" : "translateY(4px)",
-        transition: "transform 0.4s ease",
+        padding: "1.25rem 1.25rem 1.25rem",
       }}>
+        {/* Tagline — selalu tampil */}
         <p style={{
-          fontSize: "0.7rem",
+          fontSize: "0.65rem",
           fontFamily: "var(--font-mono)",
           color: "var(--leaf)",
           letterSpacing: "0.1em",
           textTransform: "uppercase",
-          marginBottom: "0.4rem",
-          opacity: hovered ? 1 : 0.7,
-          transition: "opacity 0.3s ease",
+          marginBottom: "0.35rem",
+          lineHeight: 1.4,
         }}>
           {dest.tagline}
         </p>
+
+        {/* Nama — selalu tampil */}
         <h3 style={{
           fontFamily: "var(--font-display)",
-          fontSize: "clamp(1.1rem, 2.5vw, 1.4rem)",
+          fontSize: "clamp(1rem, 2vw, 1.3rem)",
           fontWeight: 700,
           color: "var(--white)",
-          marginBottom: "0.6rem",
+          marginBottom: "0",
           lineHeight: 1.2,
         }}>
           {dest.name}
         </h3>
-        <p style={{
-          fontSize: "0.82rem",
-          color: "var(--mist)",
-          lineHeight: 1.6,
-          maxHeight: hovered ? "80px" : "0",
-          overflow: "hidden",
-          opacity: hovered ? 1 : 0,
-          transition: "max-height 0.4s ease, opacity 0.3s ease 0.1s",
-          marginBottom: hovered ? "0.8rem" : "0",
-        }}>
-          {dest.description}
-        </p>
+
+        {/* Deskripsi — muncul saat hover */}
         <div style={{
-          display: "flex", alignItems: "center", gap: "8px",
+          overflow: "hidden",
+          maxHeight: hovered ? "120px" : "0",
           opacity: hovered ? 1 : 0,
-          transform: hovered ? "translateY(0)" : "translateY(6px)",
-          transition: "opacity 0.3s ease 0.15s, transform 0.3s ease 0.15s",
+          transition: "max-height 0.45s ease, opacity 0.3s ease 0.1s",
+          marginTop: hovered ? "0.6rem" : "0",
         }}>
-          <span style={{ fontSize: "0.7rem", fontFamily: "var(--font-mono)", color: "var(--leaf)" }}>
+          <p style={{
+            fontSize: "0.78rem",
+            color: "var(--mist)",
+            lineHeight: 1.65,
+            fontWeight: 300,
+            marginBottom: "0.6rem",
+          }}>
+            {dest.description}
+          </p>
+          <span style={{
+            fontSize: "0.68rem",
+            fontFamily: "var(--font-mono)",
+            color: "var(--leaf)",
+            opacity: 0.8,
+          }}>
             📍 {dest.fact}
           </span>
         </div>
@@ -166,18 +172,80 @@ export default function Destinations() {
     ? destinations
     : destinations.filter(d => d.sdg.includes(filter));
 
+  // Layout: baris 1 = 3 kolom, baris 2 = 2 kolom (tall), baris 3 = 4 kolom, dst
+  const renderGrid = () => {
+    if (filtered.length === 0) return null;
+
+    const rows = [];
+    let i = 0;
+
+    while (i < filtered.length) {
+      const rowIndex = rows.length;
+
+      if (rowIndex % 3 === 1) {
+        // Baris tall — 2 kartu tinggi berdampingan
+        const items = filtered.slice(i, i + 2);
+        rows.push(
+          <div key={`row-${rowIndex}`} style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${items.length}, 1fr)`,
+            gap: "14px",
+          }}>
+            {items.map((dest, j) => (
+              <DestCard key={dest.id} dest={dest} index={i + j} tall={true} />
+            ))}
+          </div>
+        );
+        i += items.length;
+      } else if (rowIndex % 3 === 2) {
+        // Baris 4 kolom
+        const items = filtered.slice(i, i + 4);
+        rows.push(
+          <div key={`row-${rowIndex}`} style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${Math.min(items.length, 4)}, 1fr)`,
+            gap: "14px",
+          }}>
+            {items.map((dest, j) => (
+              <DestCard key={dest.id} dest={dest} index={i + j} tall={false} />
+            ))}
+          </div>
+        );
+        i += items.length;
+      } else {
+        // Baris 3 kolom (default)
+        const items = filtered.slice(i, i + 3);
+        rows.push(
+          <div key={`row-${rowIndex}`} style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${Math.min(items.length, 3)}, 1fr)`,
+            gap: "14px",
+          }}>
+            {items.map((dest, j) => (
+              <DestCard key={dest.id} dest={dest} index={i + j} tall={false} />
+            ))}
+          </div>
+        );
+        i += items.length;
+      }
+    }
+
+    return rows;
+  };
+
   return (
     <section id="destinasi" style={{
       padding: "6rem 2rem",
       background: "var(--forest)",
     }}>
       <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+
         {/* Header */}
-        <div style={{ marginBottom: "3rem" }}>
+        <div style={{ marginBottom: "2.5rem" }}>
           <p style={{
             fontFamily: "var(--font-mono)",
-            fontSize: "0.7rem",
-            letterSpacing: "0.2em",
+            fontSize: "0.68rem",
+            letterSpacing: "0.22em",
             textTransform: "uppercase",
             color: "var(--fern)",
             marginBottom: "1rem",
@@ -193,11 +261,12 @@ export default function Destinations() {
           }}>
             <h2 style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(2rem, 5vw, 3rem)",
+              fontSize: "clamp(1.9rem, 4.5vw, 2.8rem)",
               fontWeight: 700,
               color: "var(--white)",
               lineHeight: 1.15,
               maxWidth: "480px",
+              letterSpacing: "-0.02em",
             }}>
               Dari ujung Aceh<br />
               <em style={{ color: "var(--leaf)", fontStyle: "italic" }}>hingga ujung Lampung</em>
@@ -212,10 +281,11 @@ export default function Destinations() {
                   style={{
                     padding: "7px 16px",
                     borderRadius: "100px",
-                    fontSize: "0.75rem",
+                    fontSize: "0.72rem",
                     fontFamily: "var(--font-mono)",
                     letterSpacing: "0.05em",
                     border: "1px solid",
+                    cursor: "pointer",
                     transition: "all 0.2s",
                     background: filter === f ? "var(--leaf)" : "transparent",
                     borderColor: filter === f ? "var(--leaf)" : "rgba(90,176,138,0.25)",
@@ -230,16 +300,9 @@ export default function Destinations() {
           </div>
         </div>
 
-        {/* Masonry-like grid */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-          gap: "16px",
-          gridAutoRows: "280px",
-        }}>
-          {filtered.map((dest, i) => (
-            <DestCard key={dest.id} dest={dest} index={i} />
-          ))}
+        {/* Grid */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+          {renderGrid()}
         </div>
 
         {filtered.length === 0 && (
@@ -254,6 +317,14 @@ export default function Destinations() {
           </div>
         )}
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          #destinasi .dest-row {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

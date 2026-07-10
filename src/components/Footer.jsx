@@ -26,7 +26,7 @@ export default function Footer() {
                 fontSize: "1.3rem",
                 fontWeight: 700,
                 color: "var(--leaf)",
-              }}>Rimba Trail</span>
+              }}>Salingka</span>
             </div>
             <p style={{
               fontSize: "0.83rem",
@@ -86,7 +86,7 @@ export default function Footer() {
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               {[
-                { label: "Tentang Rimba Trail", href: "#tentang" },
+                { label: "Tentang Salingka", href: "#tentang" },
                 { label: "Destinasi Ekowisata", href: "#destinasi" },
                 { label: "Panduan Wisatawan", href: "#panduan" },
               ].map(l => (
@@ -118,7 +118,7 @@ export default function Footer() {
             color: "rgba(168,201,184,0.4)",
             fontFamily: "var(--font-mono)",
           }}>
-            © 2026 Rimba Trail · SDGs Creative Web Competition · BytesFest 2026
+            © 2026 Salingka · SDGs Creative Web Competition · BytesFest 2026
           </p>
           <p style={{
             fontSize: "0.75rem",

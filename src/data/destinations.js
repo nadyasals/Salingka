@@ -2,6 +2,7 @@ export const destinations = [
   {
     id: 1,
     name: "Taman Nasional Gunung Leuser",
+    coords: { lat: 3.6, lng: 97.4 },
     province: "Aceh",
     tagline: "Terakhirnya hutan orangutan di bumi",
     description: "Salah satu kawasan hutan hujan tropis yang paling beragam di dunia. Rumah bagi orangutan Sumatra, harimau, gajah, dan badak — empat spesies besar yang kini terancam punah.",
@@ -14,6 +15,7 @@ export const destinations = [
   {
     id: 2,
     name: "Danau Toba",
+    coords: { lat: 2.6, lng: 98.8 },
     province: "Sumatra Utara",
     tagline: "Kaldera purba yang menjadi danau terdalam Asia",
     description: "Terbentuk dari letusan supervolcano 74.000 tahun lalu. Danau vulkanik terbesar di dunia ini menyimpan budaya Batak yang kaya dan ekosistem air tawar yang unik.",
@@ -26,6 +28,7 @@ export const destinations = [
   {
     id: 3,
     name: "Lembah Harau",
+    coords: { lat: -0.15, lng: 100.65 },
     province: "Sumatra Barat",
     tagline: "Tebing-tebing granit raksasa yang memeluk lembah",
     description: "Cagar alam dengan dinding tebing vertikal setinggi 100–150 meter yang dihiasi air terjun musiman. Dihuni komunitas petani tradisional yang menjaga kearifan lokal turun-temurun.",
@@ -38,6 +41,7 @@ export const destinations = [
   {
     id: 4,
     name: "Rafflesia Arnoldii",
+    coords: { lat: -3.8, lng: 102.3 },
     province: "Bengkulu",
     tagline: "Bunga terbesar di bumi hanya mekar 7 hari",
     description: "Bengkulu adalah habitat utama Rafflesia Arnoldii, bunga parasit tanpa akar, batang, dan daun yang mencapai diameter 1 meter. Keberadaannya menjadi indikator kesehatan hutan Sumatra.",
@@ -50,6 +54,7 @@ export const destinations = [
   {
     id: 5,
     name: "Way Kambas",
+    coords: { lat: -4.6, lng: 105.6 },
     province: "Lampung",
     tagline: "Suaka terakhir gajah Sumatra di selatan",
     description: "Taman nasional yang menjadi pusat konservasi gajah Sumatra sejak 1985. Program sekolah gajah di sini telah berhasil menjaga populasi dari kepunahan dan memberdayakan masyarakat sekitar.",
@@ -62,6 +67,7 @@ export const destinations = [
   {
     id: 6,
     name: "Pulau Weh",
+    coords: { lat: 5.85, lng: 95.3 },
     province: "Aceh",
     tagline: "Titik nol Indonesia, laut bening tanpa tepi",
     description: "Ujung paling barat kepulauan Indonesia menyimpan terumbu karang yang hampir tak terjamah. Kawasan lautnya menjadi zona konservasi penyu dan hiu paus.",
@@ -74,6 +80,7 @@ export const destinations = [
   {
     id: 7,
     name: "Hutan Mangrove Riau",
+    coords: { lat: 0.9, lng: 102.4 },
     province: "Riau",
     tagline: "Benteng hidup pesisir yang menyerap karbon",
     description: "Ekosistem mangrove Riau adalah salah satu yang terluas di Asia Tenggara, melindungi pesisir dari abrasi dan menyimpan karbon 5x lebih banyak dari hutan darat.",
@@ -86,6 +93,7 @@ export const destinations = [
   {
     id: 8,
     name: "Taman Nasional Kerinci Seblat",
+    coords: { lat: -2.08, lng: 101.26 },
     province: "Jambi",
     tagline: "Atap Sumatra dan benteng keanekaragaman hayati",
     description: "Kawasan konservasi terbesar di Sumatra mencakup Gunung Kerinci, gunung berapi tertinggi di Indonesia. Rumah bagi harimau Sumatra dan ratusan spesies endemik.",
@@ -98,6 +106,7 @@ export const destinations = [
   {
     id: 9,
     name: "Pantai Mandeh",
+    coords: { lat: -1.35, lng: 100.35 },
     province: "Sumatra Barat",
     tagline: "Raja Ampatnya Sumatra yang tersembunyi",
     description: "Teluk yang terlindungi gugusan pulau kecil menciptakan laguna alami berwarna toska. Komunitas nelayan sekitarnya masih menjalankan tradisi melaut yang selaras alam.",

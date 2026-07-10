@@ -36,7 +36,7 @@ export default function Navbar() {
           color: "var(--leaf)",
           letterSpacing: "0.02em",
         }}>
-          Rimba Trail
+          Salingka
         </span>
       </a>
 
