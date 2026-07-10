@@ -1490,10 +1490,72 @@ function FlightIndicator({ cameraState }: { cameraState: CameraState }) {
 // Manages all state and ref bridges between React & R3F worlds.
 // ─────────────────────────────────────────────────────────────────────────────
 
+// ─────────────────────────────────────────────────────────────────────────────
+// WEBGL SUPPORT DETECTION
+// ─────────────────────────────────────────────────────────────────────────────
+
+function isWebGLSupported(): boolean {
+  if (typeof window === 'undefined') return true // SSR: assume supported
+  try {
+    const canvas = document.createElement('canvas')
+    return !!(
+      window.WebGLRenderingContext &&
+      (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'))
+    )
+  } catch {
+    return false
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// WEBGL FALLBACK — shown when browser doesn't support WebGL
+// ─────────────────────────────────────────────────────────────────────────────
+
+function OrbitalFallback() {
+  const { lang } = useLanguage()
+  return (
+    <div className="flex h-full w-full flex-col items-center justify-center gap-6 px-6 text-center">
+      <div
+        className="liquid-glass flex h-20 w-20 items-center justify-center rounded-full"
+        style={{ border: '1px solid oklch(0.82 0.14 85 / 30%)' }}
+      >
+        <span style={{ fontSize: '2.5rem' }}>🌿</span>
+      </div>
+      <h2 className="font-serif text-3xl text-foreground md:text-4xl">
+        {lang === 'id' ? 'Penjelajah Orbital' : 'Orbital Explorer'}
+      </h2>
+      <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
+        {lang === 'id'
+          ? 'Browser ini tidak mendukung WebGL. Silakan gunakan Chrome, Firefox, atau Safari terbaru untuk menikmati peta 3D interaktif Sumatra.'
+          : 'Your browser does not support WebGL. Please use a modern Chrome, Firefox, or Safari to experience the interactive 3D Sumatra map.'}
+      </p>
+      <div className="grid grid-cols-3 gap-3 mt-2">
+        {ECO_LOCATIONS.slice(0, 6).map((loc) => (
+          <a
+            key={loc.id}
+            href="#packages"
+            className="liquid-glass rounded-xl px-3 py-2 text-center transition-all hover:scale-105"
+            style={{ border: `1px solid ${loc.color}30` }}
+          >
+            <span className="block text-[9px] uppercase tracking-wider" style={{ color: loc.color }}>
+              {loc.name}
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export function OrbitalNavigation() {
   const { theme } = useTheme()
   const isLight = theme === 'light'
   const bgColor = isLight ? 'transparent' : '#050505'
+  const [webglSupported, setWebglSupported] = useState(true)
+
+  useEffect(() => {
+    setWebglSupported(isWebGLSupported())
+  }, [])
 
   // ── React state (drives UI conditionals + re-renders) ──────────────────────
   const [cameraState, setCameraState]         = useState<CameraState>('orbit')
@@ -1600,43 +1662,50 @@ export function OrbitalNavigation() {
         </div>
       </div>
 
-      {/* ── WebGL Canvas ──────────────────────────────────────────────────── */}
-      <Canvas
-        shadows
-        camera={{
-          fov: 45,
-          position: DEFAULT_CAM_POS.toArray() as [number, number, number],
-          near: 0.1,
-          far: 250,
-        }}
-        gl={{ antialias: true, alpha: false }}
-        style={{ background: bgColor }}
-      >
-        <OrbitalScene
-          cameraStateRef={cameraStateRef}
-          targetPosRef={targetPosRef}
-          targetLookAtRef={targetLookAtRef}
-          orbitControlsRef={orbitControlsRef}
-          islandPausedRef={islandPausedRef}
-          terrainTimeRef={terrainTimeRef}
-          islandMatrixRef={islandMatrixRef}
-          onHotspotClick={handleHotspotClick}
-          onArrived={handleArrived}
-          activeId={activeLocation?.id ?? null}
-          isLight={isLight}
-        />
-      </Canvas>
+      {/* ── WebGL not supported: show fallback ──────────────────────────────── */}
+      {!webglSupported ? (
+        <OrbitalFallback />
+      ) : (
+        <>
+          {/* ── WebGL Canvas ────────────────────────────────────────────────── */}
+          <Canvas
+            shadows
+            camera={{
+              fov: 45,
+              position: DEFAULT_CAM_POS.toArray() as [number, number, number],
+              near: 0.1,
+              far: 250,
+            }}
+            gl={{ antialias: true, alpha: false }}
+            style={{ background: bgColor }}
+          >
+            <OrbitalScene
+              cameraStateRef={cameraStateRef}
+              targetPosRef={targetPosRef}
+              targetLookAtRef={targetLookAtRef}
+              orbitControlsRef={orbitControlsRef}
+              islandPausedRef={islandPausedRef}
+              terrainTimeRef={terrainTimeRef}
+              islandMatrixRef={islandMatrixRef}
+              onHotspotClick={handleHotspotClick}
+              onArrived={handleArrived}
+              activeId={activeLocation?.id ?? null}
+              isLight={isLight}
+            />
+          </Canvas>
 
-      {/* ── HTML Overlays ─────────────────────────────────────────────────── */}
-      <OrbitOverlay visible={cameraState === 'orbit'} />
+          {/* ── HTML Overlays ──────────────────────────────────────────────── */}
+          <OrbitOverlay visible={cameraState === 'orbit'} />
 
-      <InfoPanel
-        location={activeLocation}
-        visible={panelVisible}
-        onBack={handleBack}
-      />
+          <InfoPanel
+            location={activeLocation}
+            visible={panelVisible}
+            onBack={handleBack}
+          />
 
-      <FlightIndicator cameraState={cameraState} />
+          <FlightIndicator cameraState={cameraState} />
+        </>
+      )}
     </section>
   )
 }
