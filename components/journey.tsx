@@ -458,7 +458,7 @@ export function Journey() {
           {/* LEFT SIDE: Sticky Image + Counter */}
           <div className="md:col-span-5 flex flex-col gap-6 sticky top-24 md:top-32 self-start z-20">
             {/* Image frame wrapper */}
-            <div className="liquid-glass-strong relative aspect-[4/5] w-full overflow-hidden rounded-2xl shadow-2xl">
+            <div className="liquid-glass-strong relative aspect-[4/3] md:aspect-[4/5] w-full overflow-hidden rounded-2xl shadow-2xl">
               <AnimatePresence mode="wait">
                 <SandTransitionImage
                   key={activeChapter}

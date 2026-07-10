@@ -232,10 +232,10 @@ export function ResponsibleChecklist() {
         className="relative overflow-hidden py-28 md:py-40 bg-transparent border-t border-b border-foreground/5 dark:border-white/5"
       >
         <div className="relative mx-auto max-w-7xl px-6 md:px-10 text-center">
-          <span className="liquid-glass mb-6 inline-block rounded-full px-4 py-1.5 text-[10px] uppercase tracking-[0.4em] text-white/20">
+          <span className="liquid-glass mb-6 inline-block rounded-full px-4 py-1.5 text-[10px] uppercase tracking-[0.4em] text-foreground/20">
             {lang === 'id' ? 'Wisata Bertanggung Jawab' : 'Responsible Travel'}
           </span>
-          <h2 className="font-serif text-4xl font-medium leading-tight text-white/20 md:text-5xl">
+          <h2 className="font-serif text-4xl font-medium leading-tight text-foreground/20 md:text-5xl">
             {lang === 'id' ? 'Memuat Eco-Checklist...' : 'Loading Eco-Checklist...'}
           </h2>
         </div>
@@ -305,9 +305,9 @@ export function ResponsibleChecklist() {
           <div className="lg:col-span-7 flex flex-col gap-4">
             
             {/* Progress Bar Container */}
-            <div className="liquid-glass rounded-2xl p-5 border border-white/10 flex flex-col gap-3">
+            <div className="liquid-glass rounded-2xl p-5 border border-foreground/10 flex flex-col gap-3">
               <div className="flex justify-between items-center text-xs font-mono">
-                <span className="text-white/40">
+                <span className="text-foreground/40">
                   {lang === 'id' ? 'INDEKS KESIAPAN HUTAN' : 'JUNGLE PREPAREDNESS INDEX'}
                 </span>
                 <span className="text-emerald-600 dark:text-emerald-400 font-bold">
@@ -317,7 +317,7 @@ export function ResponsibleChecklist() {
                   }
                 </span>
               </div>
-              <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden relative">
+              <div className="h-2 w-full bg-foreground/5 rounded-full overflow-hidden relative">
                 <motion.div
                   className="h-full bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-emerald-500 dark:to-teal-400 rounded-full"
                   initial={{ width: 0 }}
@@ -341,7 +341,7 @@ export function ResponsibleChecklist() {
                   className={`group rounded-2xl border p-5 transition-all duration-300 cursor-pointer flex gap-4 ${
                     isChecked 
                       ? 'border-emerald-600/40 dark:border-emerald-500/40 bg-emerald-100/50 dark:bg-emerald-950/20' 
-                      : 'border-white/10 bg-white/[0.04] hover:border-white/20 hover:bg-white/[0.07]'
+                      : 'border-foreground/10 bg-foreground/[0.04] hover:border-foreground/20 hover:bg-foreground/[0.07]'
                   }`}
                 >
                   {/* Custom Checkbox */}
@@ -350,7 +350,7 @@ export function ResponsibleChecklist() {
                       className={`h-5 w-5 rounded-md border flex items-center justify-center transition-all ${
                         isChecked 
                           ? 'bg-emerald-500 border-emerald-500 dark:border-emerald-400 text-white dark:text-black' 
-                          : 'border-white/30 group-hover:border-white/60'
+                          : 'border-foreground/30 group-hover:border-foreground/60'
                       }`}
                     >
                       {isChecked && <FiCheck className="h-3.5 w-3.5 stroke-[3]" />}
@@ -358,7 +358,7 @@ export function ResponsibleChecklist() {
                   </div>
 
                   {/* Icon */}
-                  <div className={`flex-shrink-0 mt-0.5 transition-colors ${isChecked ? 'text-emerald-600 dark:text-emerald-400' : 'text-white/30'}`}>
+                  <div className={`flex-shrink-0 mt-0.5 transition-colors ${isChecked ? 'text-emerald-600 dark:text-emerald-400' : 'text-foreground/30'}`}>
                     {item.icon}
                   </div>
 
@@ -366,12 +366,12 @@ export function ResponsibleChecklist() {
                   <div className="flex-1 flex flex-col gap-1.5">
                     <div className="flex justify-between items-center">
                       <h4 className={`text-sm font-semibold tracking-wide transition-colors ${
-                        isChecked ? 'text-emerald-600 dark:text-emerald-400' : 'text-white'
+                        isChecked ? 'text-emerald-600 dark:text-emerald-400' : 'text-foreground'
                       }`}>
                         {item.title}
                       </h4>
                       <span className={`text-[10px] font-mono hidden sm:inline-block transition-colors ${
-                        isChecked ? 'text-emerald-600/80 dark:text-emerald-400/60' : 'text-white/25'
+                        isChecked ? 'text-emerald-600/80 dark:text-emerald-400/60' : 'text-foreground/25'
                       }`}>
                         {isChecked 
                           ? (lang === 'id' ? 'TERKUNCI ✓' : 'LOCKED IN ✓') 
@@ -379,7 +379,7 @@ export function ResponsibleChecklist() {
                         }
                       </span>
                     </div>
-                    <p className="text-[11px] text-white/55 leading-relaxed max-w-xl">
+                    <p className="text-[11px] text-foreground/55 leading-relaxed max-w-xl">
                       {item.summary}
                     </p>
                   </div>
@@ -414,16 +414,16 @@ export function ResponsibleChecklist() {
                     <IoLeaf className="h-8 w-8" />
                   </motion.div>
 
-                  <h3 className="font-serif text-2xl text-white tracking-wide leading-tight">
+                  <h3 className="font-serif text-2xl text-foreground tracking-wide leading-tight">
                     {lang === 'id' ? 'Sertifikasi Ekologis Tercapai' : 'Eco-Certification Achieved'}
                   </h3>
                   <p className="text-[9px] uppercase tracking-widest text-emerald-600 dark:text-emerald-400 font-bold mt-1.5">
                     {lang === 'id' ? '100% Siap untuk Sumatra' : '100% Prepared for Sumatra'}
                   </p>
 
-                  <div className="h-px bg-white/10 w-full my-5" />
+                  <div className="h-px bg-foreground/10 w-full my-5" />
 
-                  <p className="text-xs text-white/60 leading-relaxed max-w-sm mb-6">
+                  <p className="text-xs text-foreground/60 leading-relaxed max-w-sm mb-6">
                     {lang === 'id'
                       ? 'Anda telah berkomitmen untuk mendukung fauna hutan, meminimalkan sampah, dan meningkatkan mata pencaharian warga asli. Kode tanda tangan wisatawan Anda telah terbuka:'
                       : 'You have committed to supporting forest fauna, minimizing waste, and boosting native livelihoods. Your traveler signature code is unlocked:'
@@ -431,20 +431,20 @@ export function ResponsibleChecklist() {
                   </p>
 
                   {/* Promo Code Box */}
-                  <div className="rounded-xl border border-white/10 bg-black/40 px-5 py-4 w-full flex items-center justify-between font-mono text-xs relative group/code">
+                  <div className="rounded-xl border border-foreground/10 bg-background/60 px-5 py-4 w-full flex items-center justify-between font-mono text-xs relative group/code">
                     <div className="flex flex-col text-left gap-0.5">
-                      <span className="text-[8px] tracking-widest text-white/30 uppercase">
+                      <span className="text-[8px] tracking-widest text-foreground/30 uppercase">
                         {lang === 'id' ? 'KODE ECO-UPGRADE' : 'ECO-UPGRADE CODE'}
                       </span>
                       <span className="text-emerald-600 dark:text-emerald-400 font-bold tracking-wider text-sm select-all">LEUSERGREEN</span>
                     </div>
-                    <div className="flex items-center gap-1 text-[10px] text-white/50">
+                    <div className="flex items-center gap-1 text-[10px] text-foreground/50">
                       <FiGift className="h-4.5 w-4.5 text-emerald-600 dark:text-emerald-400" />
                       <span>{lang === 'id' ? 'Gratis Penyeimbangan Karbon' : 'Complimentary Carbon Offset'}</span>
                     </div>
                   </div>
 
-                  <p className="text-[10px] text-white/30 italic mt-4 font-mono">
+                  <p className="text-[10px] text-foreground/30 italic mt-4 font-mono">
                     {lang === 'id'
                       ? 'Masukkan kode ini pada email permintaan pemesanan atau formulir checkout.'
                       : 'Enter this code in the booking request email or check out form.'
@@ -467,21 +467,21 @@ export function ResponsibleChecklist() {
                       {localizedDisplayItems.find((it) => it.id === activeExplain)?.icon}
                     </div>
                     <div className="text-left flex flex-col">
-                      <span className="text-[9px] uppercase tracking-wider text-white/40 font-mono">
+                      <span className="text-[9px] uppercase tracking-wider text-foreground/40 font-mono">
                         {lang === 'id' ? 'ALASAN DAMPAK EKOLOGIS' : 'ECO-IMPACT RATIONALE'}
                       </span>
-                      <h4 className="font-semibold text-white tracking-wide text-sm leading-tight">
+                      <h4 className="font-semibold text-foreground tracking-wide text-sm leading-tight">
                         {localizedDisplayItems.find((it) => it.id === activeExplain)?.title}
                       </h4>
                     </div>
                   </div>
 
-                  <div className="h-px bg-white/10 w-full mb-6" />
+                  <div className="h-px bg-foreground/10 w-full mb-6" />
 
-                  <h5 className="text-[10px] font-bold text-white/40 uppercase tracking-widest text-left mb-2.5">
+                  <h5 className="text-[10px] font-bold text-foreground/40 uppercase tracking-widest text-left mb-2.5">
                     {lang === 'id' ? 'Mengapa Ini Penting' : 'Why This Matters'}
                   </h5>
-                  <p className="text-xs text-white/70 leading-relaxed text-left font-light mb-5">
+                  <p className="text-xs text-foreground/70 leading-relaxed text-left font-light mb-5">
                     {localizedDisplayItems.find((it) => it.id === activeExplain)?.whyItMatters}
                   </p>
 
@@ -499,13 +499,13 @@ export function ResponsibleChecklist() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 0.85 }}
                   exit={{ opacity: 0 }}
-                  className="liquid-glass rounded-3xl p-8 border border-white/5 flex flex-col items-center justify-center text-center text-white/40 shadow-sm"
+                  className="liquid-glass rounded-3xl p-8 border border-foreground/5 flex flex-col items-center justify-center text-center text-foreground/40 shadow-sm"
                   style={{ minHeight: '380px' }}
                 >
-                  <div className="h-12 w-12 rounded-full border border-dashed border-white/10 flex items-center justify-center text-white/20 mb-5">
+                  <div className="h-12 w-12 rounded-full border border-dashed border-foreground/10 flex items-center justify-center text-foreground/20 mb-5">
                     <FiCheck className="h-5 w-5" />
                   </div>
-                  <h4 className="font-serif text-lg font-medium text-white/60 mb-2">
+                  <h4 className="font-serif text-lg font-medium text-foreground/60 mb-2">
                     {lang === 'id' ? 'Periksa daftar' : 'Check the list'}
                   </h4>
                   <p className="text-xs leading-relaxed max-w-xs font-light">

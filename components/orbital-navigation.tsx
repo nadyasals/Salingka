@@ -1150,6 +1150,10 @@ function OrbitalScene({
         rotateSpeed={0.42}
         dampingFactor={0.08}
         enableDamping
+        touches={{
+          ONE: 2,   // TWO_FINGER_ROTATE — use 2-finger drag so 1-finger scroll still works
+          TWO: 0,   // DOLLY_PAN disabled
+        }}
       />
     </>
   )
